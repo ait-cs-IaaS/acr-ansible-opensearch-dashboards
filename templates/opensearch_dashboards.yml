@@ -1,5 +1,6 @@
+{# Wolfgang Hotwagner updated this file on 19. April 2024 #}
 server.port: 5601
-server.host: "{{ hostvars[inventory_hostname]['ip'] }}"
+server.host: "{{ opensearch_hosts[opensearch_hostname]['ip'] }}"
 opensearch.hosts: ["{{ os_nodes_dashboards }}"]
 opensearch.ssl.verificationMode: none
 opensearch.username: "kibanaserver"
