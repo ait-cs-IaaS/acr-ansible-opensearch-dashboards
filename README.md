@@ -13,7 +13,10 @@ Checkout the CHANGELOG.txt for all changes.
 # Configuration
 
 ```
-os_version: "2.13.0"
+  # Start service after installation and run tests
+  os_test: True
+
+  os_version: "2.13.0"
   os_dashboards_version: "2.13.0"
   os_dashboards_user: opensearch-dashboards
   os_download_url: https://artifacts.opensearch.org/releases/bundle/opensearch
