@@ -59,7 +59,9 @@
           cmd: rm {{ os_dashboards_conf_dir }}/dashboards.{{ item }}
         with_items: ["key", "pem"]
         register: rm_output
-        failed_when: 'not "No such file or directory" in rm_output.stderr'
+        failed_when: 
+          - rm_output.rc != 0
+          - 'not "No such file or directory" in rm_output.stderr'
 
       - name: Copy HTTP key and certificate files
         ansible.builtin.shell: 
