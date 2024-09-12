@@ -1,27 +1,25 @@
 ---
-#
-# Last Changes:
-# Wolfgang Hotwagner updated this file on 23. April 2024
-#
 
-os_nodes: |-
-        {% for item in opensearch_hosts -%}
-          {{ opensearch_hosts[item]['ip'] }}{% if not loop.last %}","{% endif %}
-        {%- endfor %}
+os_dashboards_user: opensearch-dashboards
 
-populate_inventory_to_hosts_file: true
+os_dashboards_host_ip: 127.0.0.1
+os_dashboards_api_port: 9200
+os_dashboards_nodes: [ "https://{{ os_dashboards_host_ip }}:{{ os_dashboards_api_port }}" ]
 
 os_dashboards_home: /usr/share/opensearch-dashboards
-os_conf_dir: /usr/share/opensearch-dashboards/config
-os_plugin_bin_path: /usr/share/opensearch-dashboards/bin/opensearch-dashboards-plugin
+os_dashboards_conf_dir: /usr/share/opensearch-dashboards/config
+os_dashboards_plugin_bin_path: /usr/share/opensearch-dashboards/bin/opensearch-dashboards-plugin
 
-os_api_port: 9200
-os_nodes_dashboards: |-
-        {% for item in opensearch_hosts -%}
-          https://{{ opensearch_hosts[item]['ip'] }}:{{ os_api_port }}{% if not loop.last %}","{% endif %}
-        {%- endfor %}
+os_dashboards_ssl_cert: "{{ os_dashboards_home }}/config/dashboards.pem"
+os_dashboards_ssl_key: "{{ os_dashboards_home }}/config/dashboards.key"
+os_dashboards_systemctl_path: /etc/systemd/system
 
-systemctl_path: /etc/systemd/system
+os_dashboards_use_opensearch_certs: true
+os_dashboards_download_url: https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards
 
-# Auth type: 'internal' or 'oidc' (OpenID). Default: internal
-auth_type: internal
+# Password for kibanaserver user
+# used for opensearch backend
+kibanaserver_password: P4$$w0rD_f0r_kibanaserver
+
+# Config dir of opensearch backend
+os_config_dir: /usr/share/opensearch/config

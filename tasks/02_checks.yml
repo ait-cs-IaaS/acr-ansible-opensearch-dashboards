@@ -1,0 +1,12 @@
+---
+
+- name: Get all the installed dashboards plugins
+  become: true
+  become_user: "{{ os_dashboards_user }}"
+  ansible.builtin.command: 
+    cmd: "{{ os_dashboards_plugin_bin_path }} list"
+  register: list_plugins
+
+- name: Show all the installed dashboards plugins
+  ansible.builtin.debug:
+    msg: "{{ list_plugins.stdout }}"
